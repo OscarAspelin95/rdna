@@ -5,7 +5,7 @@ use crossterm::{
     style::{Color, Print, SetForegroundColor},
     terminal::{self, EnterAlternateScreen, LeaveAlternateScreen},
 };
-use rand::{Rng, seq::IteratorRandom};
+use rand::prelude::*;
 use std::{
     io::{self, Write},
     time::Duration,
@@ -25,13 +25,13 @@ struct Column {
 
 impl Column {
     fn new(x: u16, height: u16) -> Self {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         let trail_len = (height / 2).max(4) as i16;
 
         Self {
             x,
-            y: rng.gen_range(-trail_len..0),
-            speed: rng.gen_range(1..2),
+            y: rng.random_range(-trail_len..0),
+            speed: rng.random_range(1..2),
             trail_len,
             nts: (0..height)
                 .map(|_| Nucleotide::iter().choose(&mut rng).unwrap())
@@ -87,16 +87,16 @@ impl Column {
     }
 
     fn update(&mut self, height: u16) {
-        let mut rng = rand::thread_rng();
+        let mut rng = rand::rng();
         self.y += self.speed as i16;
 
         // Randomly glitch a few trail characters each frame
-        for nt in self.nts.iter_mut().choose_multiple(&mut rng, 3) {
+        for nt in self.nts.iter_mut().sample(&mut rng, 3) {
             *nt = Nucleotide::iter().choose(&mut rng).unwrap();
         }
 
         if self.y - self.trail_len > height as i16 {
-            self.y = rng.gen_range(-self.trail_len..0);
+            self.y = rng.random_range(-self.trail_len..0);
             self.head_nt = Nucleotide::iter().choose(&mut rng).unwrap();
             for nt in &mut self.nts {
                 *nt = Nucleotide::iter().choose(&mut rng).unwrap();
