@@ -1,9 +1,9 @@
 [package]
 name = "rdna"
-version = "0.0.1"
+version = "0.0.0"
 edition = "2024"
 
 [dependencies]
-crossterm = "0.27"
-rand = "0.8"
+crossterm = "0.29.0"
+rand = "0.10.1"
 strum = { version = "0.28.0", features = ["derive"] }
