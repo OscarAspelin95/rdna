@@ -1,7 +1,7 @@
 name: Dev Check
 
 on:
-  pull_request:
+  push:
 
 env:
   CARGO_TERM_COLOR: always
