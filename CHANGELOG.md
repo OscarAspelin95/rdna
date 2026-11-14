@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.4](https://github.com/OscarAspelin95/rdna/compare/v0.0.3...v0.0.4) - 2026-11-14
+
+### Fixed
+
+- *(ci)* Try enable auto binary upload after release
+
 ## [0.0.3](https://github.com/OscarAspelin95/rdna/compare/v0.0.2...v0.0.3) - 2026-11-14
 
 ### Fixed
