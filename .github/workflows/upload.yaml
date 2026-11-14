@@ -12,6 +12,7 @@ env:
   RUST_BACKTRACE: 1
   RUSTFLAGS: -D warnings
   RUSTUP_MAX_RETRIES: 10
+  BINARY_NAME: rdna
 
 defaults:
   run:
@@ -63,8 +64,8 @@ jobs:
         if: endsWith(matrix.target, 'windows-msvc')
       - uses: taiki-e/upload-rust-binary-action@v1
         with:
-          bin: my-bin
+          bin: ${{ env.BINARY_NAME }}
           target: ${{ matrix.target }}
-          tar: all
+          tar: unix
           zip: windows
           token: ${{ secrets.GITHUB_TOKEN }}
