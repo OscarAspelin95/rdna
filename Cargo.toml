@@ -2,6 +2,8 @@
 name = "rdna"
 version = "0.0.1"
 edition = "2024"
+description = "cmatrix but for bioinformaticians"
+license = "MIT"
 
 [dependencies]
 crossterm = "0.29.0"
