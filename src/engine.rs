@@ -125,12 +125,11 @@ pub fn run(stdout: &mut impl Write) -> io::Result<()> {
         .collect();
 
     loop {
-        if event::poll(Duration::from_millis(45))? {
-            if let Event::Key(key) = event::read()? {
-                if key.code == KeyCode::Char('q') || key.code == KeyCode::Esc {
-                    break;
-                }
-            }
+        if event::poll(Duration::from_millis(45))?
+            && let Event::Key(key) = event::read()?
+            && (key.code == KeyCode::Char('q') || key.code == KeyCode::Esc)
+        {
+            break;
         }
 
         match terminal::size() {
